@@ -2,6 +2,10 @@
 
 Syntax highlighting for Xtensa GNU assembly, aimed at ESP32-class Xtensa targets such as ESP32, ESP32-S2 and ESP32-S3.
 
+## Preview
+
+![Xtensa Assembly syntax highlighting](https://raw.githubusercontent.com/ForenZes/xtensa-assembly-synatax-highlighter/refs/heads/main/images/xtensa-highlight-preview.png)
+
 ## Features
 
 - Xtensa a0-a15 registers and sp
@@ -51,4 +55,4 @@ Xtensa cores are configurable, so not every instruction is present on every Xten
 ## Developed by
 - GeoSn0w ([Twitter](https://twitter.com/fce365))
 
-For ForenZes Labs
+For [ForenZes Labs](https://forenzes.com)

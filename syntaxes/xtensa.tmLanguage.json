@@ -1,0 +1,69 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Xtensa Assembly",
+  "scopeName": "source.xtensa-asm",
+  "patterns": [
+    { "include": "#preprocessor" },
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#labels" },
+    { "include": "#directives" },
+    { "include": "#registers" },
+    { "include": "#special-registers" },
+    { "include": "#instructions" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "preprocessor": { "patterns": [
+      { "name": "meta.preprocessor.xtensa", "match": "^\\s*#\\s*(?:include|define|undef|if|ifdef|ifndef|elif|else|endif|error|warning|pragma)\\b.*$" }
+    ]},
+    "comments": { "patterns": [
+      { "name": "comment.line.double-slash.xtensa", "match": "//.*$" },
+      { "name": "comment.line.number-sign.xtensa", "match": "#(?!\\s*(?:include|define|undef|if|ifdef|ifndef|elif|else|endif|error|warning|pragma)\\b).*$" },
+      { "name": "comment.block.xtensa", "begin": "/\\*", "end": "\\*/" }
+    ]},
+    "strings": { "patterns": [
+      { "name": "string.quoted.double.xtensa", "begin": "\"", "end": "\"", "patterns": [{ "name": "constant.character.escape.xtensa", "match": "\\\\." }] },
+      { "name": "string.quoted.single.xtensa", "begin": "'", "end": "'", "patterns": [{ "name": "constant.character.escape.xtensa", "match": "\\\\." }] }
+    ]},
+    "labels": { "patterns": [
+      { "match": "^\\s*([A-Za-z_.$][A-Za-z0-9_.$]*|[0-9]+):", "captures": { "1": { "name": "entity.name.label.xtensa" } } },
+      { "name": "variable.other.local-label-reference.xtensa", "match": "\\b[0-9]+[fb]\\b" }
+    ]},
+    "directives": { "patterns": [
+      { "name": "keyword.directive.xtensa", "match": "(?i)(?<![A-Za-z0-9_.$])\\.(?:abort|align|altmacro|ascii|asciz|balign|balignl|balignw|byte|comm|data|dc\\.(?:b|d|l|s|w|x)|double|eject|else|elseif|end|endfunc|endif|endm|endr|equ|equiv|eqv|err|error|exitm|extern|fail|file|fill|float|func|global|globl|gnu_attribute|hidden|hword|ident|if|ifdef|ifeq|ifeqs|ifge|ifgt|ifle|iflt|ifnc|ifndef|ifne|ifnes|ifnotdef|incbin|include|int|internal|irp|irpc|lcomm|line|linkonce|list|literal|literal_position|local|long|macro|noaltmacro|nolist|octa|org|p2align|popsection|previous|print|protected|psize|purgem|pushsection|quad|rept|section|set|short|single|size|skip|sleb128|space|string|string16|string32|string64|struct|subsection|symver|text|title|type|uleb128|version|vtable_entry|vtable_inherit|warning|weak|weakref|word|zero)\\b" }
+    ]},
+    "registers": { "patterns": [
+      { "name": "variable.language.register.general.xtensa", "match": "(?i)\\b(?:a(?:1[0-5]|[0-9])|sp)\\b" },
+      { "name": "variable.language.register.boolean.xtensa", "match": "(?i)\\bb(?:1[0-5]|[0-9])\\b" },
+      { "name": "variable.language.register.float.xtensa", "match": "(?i)\\bf(?:1[0-5]|[0-9])\\b" }
+    ]},
+    "special-registers": { "patterns": [
+      { "name": "variable.language.register.special.xtensa", "match": "(?i)\\b(?:pc|sar|lbeg|lend|lcount|litbase|windowbase|windowstart|ps|threadptr|br|scompare1|acclo|acchi|m0|m1|m2|m3|expstate|fcr|fsr|depc|eps[2-7]|epc[1-7]|excsave[1-7]|exccause|debugcause|ccount|prid|icount|icountlevel|ccompare[0-2]|misc[0-3]|atomctl|memctl|vecbase|intset|intclear|intenable|interrupt)\\b" }
+    ]},
+    "instructions": { "patterns": [
+      { "name": "keyword.control.flow.xtensa", "match": "(?i)\\b(?:beq|beqz|bge|bgeu|blt|bltu|bne|bnez|bany|bnone|ball|bnall|bbc|bbci|bbs|bbsi|beqi|bnei|bgei|blti|bgeui|bltui|bf|bt|j|jx|call0|call4|call8|call12|callx0|callx4|callx8|callx12|ret|ret\\.n|retw|retw\\.n|loop|loopgtz|loopnez|entry|break|break\\.n|syscall|waiti|rfi|rfde|rfwo|rfwu)\\b" },
+      { "name": "keyword.operator.arithmetic.xtensa", "match": "(?i)\\b(?:abs|add|add\\.n|addi|addi\\.n|addx2|addx4|addx8|sub|subx2|subx4|subx8|neg|and|or|xor|movi|movi\\.n|mov|mov\\.n|moveqz|movnez|movgez|movltz|min|max|minu|maxu|clamps|sext|sext\\.b|sext\\.h|extui|src|ssa8b|ssa8l|ssai|ssr|ssl|sll|slli|sra|srai|srl|srli|nsau|nsa|clz|mul16s|mul16u|mull|muluh|mulsh|quos|quou|rems|remu|addexcl|addexcl\\.w)\\b" },
+      { "name": "keyword.other.memory.xtensa", "match": "(?i)\\b(?:l8ui|l16ui|l16si|l32i|l32i\\.n|l32r|s8i|s16i|s32i|s32i\\.n|l32ai|s32ri|s32c1i|memw|dpref|ipref)\\b" },
+      { "name": "keyword.other.system.xtensa", "match": "(?i)\\b(?:rsr|wsr|xsr|rsil|rer|wer|ritlb0|ritlb1|witlb|rdtlb0|rdtlb1|wdtlb|pitlb|pdtlb|iitlb|idtlb|isync|rsync|esync|dsync|ill|nop|nop\\.n)\\b" },
+      { "name": "keyword.other.boolean.xtensa", "match": "(?i)\\b(?:andb|andbc|orb|orbc|xorb|any4|all4|any8|all8|movf|movt)\\b" },
+      { "name": "keyword.other.float.xtensa", "match": "(?i)\\b(?:abs\\.s|add\\.s|sub\\.s|mul\\.s|madd\\.s|msub\\.s|neg\\.s|mov\\.s|moveqz\\.s|movnez\\.s|movgez\\.s|movltz\\.s|div0\\.s|divn\\.s|const\\.s|float\\.s|ufloat\\.s|trunc\\.s|utrunc\\.s|floor\\.s|ceil\\.s|round\\.s|oeq\\.s|olt\\.s|ole\\.s|ueq\\.s|ult\\.s|ule\\.s|un\\.s|rfr|wfr)\\b" },
+      { "name": "keyword.other.dsp.xtensa", "match": "(?i)\\b(?:ae_[a-z0-9_.]+|ee_[a-z0-9_.]+)\\b" }
+    ]},
+    "constants": { "patterns": [
+      { "name": "constant.language.symbol.xtensa", "match": "(?<![A-Za-z0-9_.$])@[A-Za-z_][A-Za-z0-9_]*\\b" },
+      { "name": "constant.other.symbol.xtensa", "match": "\\b[A-Z_][A-Z0-9_]{2,}\\b" }
+    ]},
+    "numbers": { "patterns": [
+      { "name": "constant.numeric.hex.xtensa", "match": "(?<![A-Za-z0-9_])[-+]?0[xX][0-9A-Fa-f]+\\b" },
+      { "name": "constant.numeric.binary.xtensa", "match": "(?<![A-Za-z0-9_])[-+]?0[bB][01]+\\b" },
+      { "name": "constant.numeric.octal.xtensa", "match": "(?<![A-Za-z0-9_])[-+]?0[0-7]+\\b" },
+      { "name": "constant.numeric.decimal.xtensa", "match": "(?<![A-Za-z0-9_])[-+]?[0-9]+\\b" }
+    ]},
+    "operators": { "patterns": [
+      { "name": "keyword.operator.xtensa", "match": "(?:<<|>>|==|!=|<=|>=|[-+*/%&|^~<>])" }
+    ]}
+  }
+}
