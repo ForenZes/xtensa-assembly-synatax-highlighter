@@ -1,0 +1,53 @@
+{
+  "name": "xtensa-assembly",
+  "displayName": "Xtensa Assembly Syntax Highlighter",
+  "description": "Syntax highlighting for Xtensa GNU assembly, including ESP32, ESP32-S2 and ESP32-S3 source files.",
+  "version": "0.2.0",
+  "publisher": "ForenZes Labs",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "xtensa",
+    "esp32",
+    "esp32-s2",
+    "esp32-s3",
+    "assembly",
+    "assembler",
+    "gas",
+    "gnu assembler"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "xtensa-asm",
+        "aliases": [
+          "Xtensa Assembly",
+          "Xtensa ASM"
+        ],
+        "extensions": [
+          ".s",
+          ".S"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "xtensa-asm",
+        "scopeName": "source.xtensa-asm",
+        "path": "./syntaxes/xtensa.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "xtensa-asm",
+        "path": "./snippets/xtensa.json"
+      }
+    ]
+  }
+}
