@@ -3,7 +3,7 @@
   "displayName": "Xtensa Assembly Syntax Highlighter",
   "description": "Syntax highlighting for Xtensa GNU assembly, including ESP32, ESP32-S2 and ESP32-S3 source files.",
   "version": "0.2.0",
-  "publisher": "ForenZes Labs",
+  "publisher": "forenzes-labs",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
